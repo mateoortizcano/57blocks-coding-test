@@ -2,9 +2,9 @@ package com.music.app.application.converters;
 
 import com.music.app.domain.entities.UserAccountData;
 import com.music.app.infrastructure.wrappers.UserAccountDataWrapper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class UserAccountDataConverter {
     public UserAccountData convertToDomain(UserAccountDataWrapper userAccountDataWrapper) {
         return new UserAccountData(

@@ -3,7 +3,6 @@ package com.music.app.infrastructure.wrappers;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.springframework.beans.factory.annotation.Value;
 
 public class UserAccountDataWrapper {
     @NotNull

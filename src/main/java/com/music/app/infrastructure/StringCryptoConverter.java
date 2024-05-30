@@ -1,18 +1,18 @@
 package com.music.app.infrastructure;
 
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 
-import java.util.Objects;
-
+@Converter
 public class StringCryptoConverter implements AttributeConverter<String, String> {
+    public static final String ENCRYPTION_PASSWORD_PROPERTY = "jasypt.encryptor.password";
     private final StandardPBEStringEncryptor encryptor;
 
-    public StringCryptoConverter(Environment environment, @Value("jasypt.encryptor.password") String jasyptPsswd) {
+    public StringCryptoConverter(Environment environment) {
         this.encryptor = new StandardPBEStringEncryptor();
-        this.encryptor.setPassword(Objects.requireNonNull(environment.getProperty(jasyptPsswd)));
+        this.encryptor.setPassword(environment.getProperty(ENCRYPTION_PASSWORD_PROPERTY));
     }
 
     @Override
