@@ -14,8 +14,8 @@ public class CheckUserAccountExistenceService {
     private UserAccountRepository userAccountRepository;
 
     public void checkIfExists(String email) {
-        if(this.userAccountRepository.findUserAccountByEmail(email).isPresent())
+        if (this.userAccountRepository.findUserAccountByEmail(email).isPresent())
             throw new ExistentAccountException(String.format(THERE_IS_ALREADY_AN_ACCOUNT_WITH_EMAIL_S, email)
-        );
+            );
     }
 }

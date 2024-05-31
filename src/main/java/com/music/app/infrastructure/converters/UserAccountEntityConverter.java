@@ -14,12 +14,9 @@ public class UserAccountEntityConverter {
         return userAccountEntity;
     }
 
-    public static Optional<UserAccountDto> convertToDto(UserAccountEntity userAccountEntity) {
-        if (userAccountEntity == null) {
-            return Optional.empty();
-        }
-        return Optional.of(new UserAccountDto(
-                userAccountEntity.getEmail(), userAccountEntity.getPassword()
-        ));
+    public static Optional<UserAccountDto> convertToDto(Optional<UserAccountEntity> userAccountEntity) {
+        return userAccountEntity.map(
+                account -> new UserAccountDto(account.getEmail(), account.getPassword())
+        );
     }
 }

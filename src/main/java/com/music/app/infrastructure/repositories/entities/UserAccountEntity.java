@@ -8,10 +8,10 @@ import java.util.UUID;
 @Entity
 public class UserAccountEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column
+    @Column(nullable = false)
     private String email;
 
     @Convert(converter = StringCryptoConverter.class)

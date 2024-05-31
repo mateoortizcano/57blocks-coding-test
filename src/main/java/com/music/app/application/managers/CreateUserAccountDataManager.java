@@ -3,9 +3,10 @@ package com.music.app.application.managers;
 import com.music.app.domain.entities.UserAccountData;
 import com.music.app.domain.services.CreateUserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class CreateUserAccountDataManager {
 
     @Autowired
