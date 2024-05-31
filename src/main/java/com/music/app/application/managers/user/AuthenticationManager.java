@@ -1,10 +1,10 @@
-package com.music.app.application.managers;
+package com.music.app.application.managers.user;
 
 import com.music.app.domain.dtos.TokenDto;
 import com.music.app.domain.dtos.UserAccountDto;
-import com.music.app.domain.entities.UserAccountData;
+import com.music.app.domain.model.UserAccountData;
 import com.music.app.domain.ports.TokenGenerator;
-import com.music.app.domain.services.AuthenticationService;
+import com.music.app.domain.services.user.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

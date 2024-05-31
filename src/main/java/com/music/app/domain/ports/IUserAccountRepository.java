@@ -1,11 +1,11 @@
 package com.music.app.domain.ports;
 
 import com.music.app.domain.dtos.UserAccountDto;
-import com.music.app.domain.entities.UserAccountData;
+import com.music.app.domain.model.UserAccountData;
 
 import java.util.Optional;
 
-public interface UserAccountRepository {
+public interface IUserAccountRepository {
     /**
      * Find a user account by email
      *

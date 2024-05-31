@@ -2,14 +2,14 @@ package com.music.app.infrastructure.repositories.entities;
 
 import com.music.app.infrastructure.StringCryptoConverter;
 import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
-import java.util.UUID;
-
+@Table(name = "users")
 @Entity
 public class UserAccountEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @UuidGenerator
+    private String id;
 
     @Column(nullable = false)
     private String email;
@@ -17,7 +17,7 @@ public class UserAccountEntity {
     @Convert(converter = StringCryptoConverter.class)
     private String password;
 
-    public UserAccountEntity(UUID id, String email, String password) {
+    public UserAccountEntity(String id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -26,11 +26,11 @@ public class UserAccountEntity {
     public UserAccountEntity() {
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

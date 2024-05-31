@@ -26,7 +26,7 @@ public class JwtService implements TokenGenerator {
     public TokenDto generateToken(UserAccountDto authenticatedUserAccount) {
         String jwtToken = Jwts
                 .builder()
-                .subject(authenticatedUserAccount.getEmail())
+                .subject(authenticatedUserAccount.email())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + jwtExpirationTime))
                 .signWith(getSignInKey())

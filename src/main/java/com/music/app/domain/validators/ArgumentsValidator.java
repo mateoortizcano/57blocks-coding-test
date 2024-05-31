@@ -35,4 +35,10 @@ public class ArgumentsValidator {
             throw new InvalidValueException(message);
         }
     }
+
+    public static void verifyIsBiggerThan(Long size, Long limit, String message) {
+        if (size.compareTo(limit) <= 0) {
+            throw new InvalidValueException(message);
+        }
+    }
 }

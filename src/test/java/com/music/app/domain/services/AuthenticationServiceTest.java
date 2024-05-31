@@ -2,9 +2,10 @@ package com.music.app.domain.services;
 
 import com.music.app.TestingExceptionAssertions;
 import com.music.app.domain.dtos.UserAccountDto;
-import com.music.app.domain.entities.UserAccountData;
 import com.music.app.domain.exceptions.InvalidCredentialsException;
-import com.music.app.domain.ports.UserAccountRepository;
+import com.music.app.domain.model.UserAccountData;
+import com.music.app.domain.ports.IUserAccountRepository;
+import com.music.app.domain.services.user.AuthenticationService;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -13,13 +14,13 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static com.music.app.domain.services.AuthenticationService.THERE_IS_NO_ACCOUNT_REGISTERED_WITH_EMAIL_S;
-import static com.music.app.domain.services.AuthenticationService.THE_PASSWORD_DOES_NOT_MATCH;
+import static com.music.app.domain.services.user.AuthenticationService.THERE_IS_NO_ACCOUNT_REGISTERED_WITH_EMAIL_S;
+import static com.music.app.domain.services.user.AuthenticationService.THE_PASSWORD_DOES_NOT_MATCH;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AuthenticationServiceTest {
     @Mock
-    private UserAccountRepository userAccountRepository;
+    private IUserAccountRepository userAccountRepository;
     @InjectMocks
     private AuthenticationService authenticationService;
 
@@ -53,7 +54,7 @@ public class AuthenticationServiceTest {
         String password = "Password]@";
         String passwordInDb = "AnotherPass!word";
         UserAccountData userAccountData = new UserAccountData(email, password);
-        UserAccountDto userAccountDto = new UserAccountDto(email, passwordInDb);
+        UserAccountDto userAccountDto = new UserAccountDto("ID1", email, passwordInDb);
         Mockito.when(this.userAccountRepository.findUserAccountByEmail(email)).thenReturn(
                 Optional.of(userAccountDto)
         );
@@ -70,15 +71,15 @@ public class AuthenticationServiceTest {
         String email = "email@email.com";
         String password = "Password]@";
         UserAccountData userAccountData = new UserAccountData(email, password);
-        UserAccountDto userAccountDto = new UserAccountDto(email, password);
+        UserAccountDto userAccountDto = new UserAccountDto("ID2", email, password);
         Mockito.when(this.userAccountRepository.findUserAccountByEmail(email)).thenReturn(
                 Optional.of(userAccountDto)
         );
         //Act
         UserAccountDto userAccountDtoReturned = this.authenticationService.execute(userAccountData);
         //Assert
-        Assertions.assertEquals(userAccountDtoReturned.getEmail(), userAccountData.getEmail());
-        Assertions.assertEquals(userAccountDtoReturned.getPassword(), userAccountData.getPassword());
+        Assertions.assertEquals(userAccountDtoReturned.email(), userAccountData.email());
+        Assertions.assertEquals(userAccountDtoReturned.password(), userAccountData.password());
     }
 
     @AfterAll

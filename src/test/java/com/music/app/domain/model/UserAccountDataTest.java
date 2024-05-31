@@ -3,11 +3,10 @@ package com.music.app.domain.model;
 import com.music.app.TestingExceptionAssertions;
 import com.music.app.domain.exceptions.InvalidValueException;
 import com.music.app.domain.exceptions.NullOrEmptyValueExeption;
-import com.music.app.domain.entities.UserAccountData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.music.app.domain.entities.UserAccountData.*;
+import static com.music.app.domain.model.UserAccountData.*;
 
 public class UserAccountDataTest {
     @Test
@@ -85,8 +84,8 @@ public class UserAccountDataTest {
         String email = "email@email.com";
         String password = "Passwordiven!";
         UserAccountData userAccountData = new UserAccountData(email, password);
-        Assertions.assertEquals(email, userAccountData.getEmail());
-        Assertions.assertEquals(password, userAccountData.getPassword());
+        Assertions.assertEquals(email, userAccountData.email());
+        Assertions.assertEquals(password, userAccountData.password());
 
     }
 }

@@ -3,7 +3,8 @@ package com.music.app.domain.services;
 import com.music.app.TestingExceptionAssertions;
 import com.music.app.domain.dtos.UserAccountDto;
 import com.music.app.domain.exceptions.ExistentAccountException;
-import com.music.app.domain.ports.UserAccountRepository;
+import com.music.app.domain.ports.IUserAccountRepository;
+import com.music.app.domain.services.user.CheckUserAccountExistenceService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,13 +16,13 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static com.music.app.domain.services.CheckUserAccountExistenceService.THERE_IS_ALREADY_AN_ACCOUNT_WITH_EMAIL_S;
+import static com.music.app.domain.services.user.CheckUserAccountExistenceService.THERE_IS_ALREADY_AN_ACCOUNT_WITH_EMAIL_S;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CheckUserAccountExistenceServiceTest {
 
     @Mock
-    private UserAccountRepository userAccountRepository;
+    private IUserAccountRepository userAccountRepository;
     @InjectMocks
     private CheckUserAccountExistenceService checkUserAccountExistenceService;
     private AutoCloseable autoCloseable;
@@ -36,12 +37,12 @@ public class CheckUserAccountExistenceServiceTest {
         //Arrange
         String email = "email@email.com";
         Mockito.when(this.userAccountRepository.findUserAccountByEmail(email)).thenReturn(
-                Optional.of(new UserAccountDto(email, "anyPassword"))
+                Optional.of(new UserAccountDto("ID1", email, "anyPassword"))
         );
         //Act-Assert
         TestingExceptionAssertions.assertThrows(
                 () -> this.checkUserAccountExistenceService.checkIfExists(email), ExistentAccountException.class,
-                String.format(THERE_IS_ALREADY_AN_ACCOUNT_WITH_EMAIL_S,email)
+                String.format(THERE_IS_ALREADY_AN_ACCOUNT_WITH_EMAIL_S, email)
         );
     }
 
