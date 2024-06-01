@@ -1,6 +1,6 @@
 package com.music.app.application.managers.user;
 
-import com.music.app.domain.dtos.TokenDto;
+import com.music.app.infrastructure.wrappers.TokenWrapper;
 import com.music.app.domain.dtos.UserAccountDto;
 import com.music.app.domain.model.UserAccountData;
 import com.music.app.domain.ports.TokenGenerator;
@@ -15,7 +15,7 @@ public class AuthenticationManager {
     @Autowired
     private TokenGenerator tokenGenerator;
 
-    public TokenDto execute(UserAccountData userAccountData) {
+    public TokenWrapper execute(UserAccountData userAccountData) {
         UserAccountDto authenticatedUserAccount = authenticationService.execute(userAccountData);
         return this.tokenGenerator.generateToken(authenticatedUserAccount);
     }

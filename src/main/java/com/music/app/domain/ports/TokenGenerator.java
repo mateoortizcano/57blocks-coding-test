@@ -1,6 +1,6 @@
 package com.music.app.domain.ports;
 
-import com.music.app.domain.dtos.TokenDto;
+import com.music.app.infrastructure.wrappers.TokenWrapper;
 import com.music.app.domain.dtos.UserAccountDto;
 
 public interface TokenGenerator {
@@ -11,7 +11,7 @@ public interface TokenGenerator {
      * @param authenticatedUserAccount The user data
      * @return The token information
      */
-    TokenDto generateToken(UserAccountDto authenticatedUserAccount);
+    TokenWrapper generateToken(UserAccountDto authenticatedUserAccount);
 
     /**
      * Verifies if the Token provided is valid acording to user account email and expiration

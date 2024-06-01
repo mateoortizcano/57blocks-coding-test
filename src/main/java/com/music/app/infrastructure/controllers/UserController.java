@@ -3,7 +3,7 @@ package com.music.app.infrastructure.controllers;
 import com.music.app.infrastructure.converters.UserAccountDataConverter;
 import com.music.app.application.managers.user.AuthenticationManager;
 import com.music.app.application.managers.user.CreateUserAccountDataManager;
-import com.music.app.domain.dtos.TokenDto;
+import com.music.app.infrastructure.wrappers.TokenWrapper;
 import com.music.app.domain.model.UserAccountData;
 import com.music.app.infrastructure.wrappers.UserAccountDataWrapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +32,7 @@ public class UserController {
 
     @Operation(summary = "Authenticates and gets a Bearer token")
     @PostMapping("/login")
-    public TokenDto login(@RequestBody UserAccountDataWrapper userAccountDataWrapper) {
+    public TokenWrapper login(@RequestBody UserAccountDataWrapper userAccountDataWrapper) {
         UserAccountData userAccountData = UserAccountDataConverter.convertToDomain(userAccountDataWrapper);
         return this.authenticateUserManager.execute(userAccountData);
     }

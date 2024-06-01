@@ -21,7 +21,7 @@ public class SongEntity {
     private String album;
     @Column(nullable = false)
     private Boolean isPublic;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private UserAccountEntity createdBy;
 
     public SongEntity(String id, String title, String genre, Long size, String author, String album, Boolean isPublic, UserAccountEntity createdBy) {

@@ -4,23 +4,20 @@ import com.music.app.TestingExceptionAssertions;
 import com.music.app.domain.dtos.UserAccountDto;
 import com.music.app.domain.exceptions.InvalidCredentialsException;
 import com.music.app.domain.model.UserAccountData;
-import com.music.app.domain.ports.IUserAccountRepository;
 import com.music.app.domain.services.user.AuthenticationService;
+import com.music.app.infrastructure.services.FindUserService;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Optional;
-
-import static com.music.app.domain.services.user.AuthenticationService.THERE_IS_NO_ACCOUNT_REGISTERED_WITH_EMAIL_S;
 import static com.music.app.domain.services.user.AuthenticationService.THE_PASSWORD_DOES_NOT_MATCH;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AuthenticationServiceTest {
     @Mock
-    private IUserAccountRepository userAccountRepository;
+    private FindUserService findUserService;
     @InjectMocks
     private AuthenticationService authenticationService;
 
@@ -31,21 +28,6 @@ public class AuthenticationServiceTest {
         autoCloseable = MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    public void whenUserIsNotFoundInRepositoryThrowsException() {
-        //Arrange
-        String email = "email@email.com";
-        String password = "Password]@";
-        UserAccountData userAccountData = new UserAccountData(email, password);
-        Mockito.when(this.userAccountRepository.findUserAccountByEmail(email)).thenReturn(
-                Optional.empty()
-        );
-        //Act-Assert
-        TestingExceptionAssertions.assertThrows(
-                () -> this.authenticationService.execute(userAccountData), InvalidCredentialsException.class,
-                String.format(THERE_IS_NO_ACCOUNT_REGISTERED_WITH_EMAIL_S, email)
-        );
-    }
 
     @Test
     public void whenPasswordDoesntMatchThrowsException() {
@@ -55,9 +37,7 @@ public class AuthenticationServiceTest {
         String passwordInDb = "AnotherPass!word";
         UserAccountData userAccountData = new UserAccountData(email, password);
         UserAccountDto userAccountDto = new UserAccountDto("ID1", email, passwordInDb);
-        Mockito.when(this.userAccountRepository.findUserAccountByEmail(email)).thenReturn(
-                Optional.of(userAccountDto)
-        );
+        Mockito.when(this.findUserService.findUser(email)).thenReturn(userAccountDto);
         //Act-Assert
         TestingExceptionAssertions.assertThrows(
                 () -> this.authenticationService.execute(userAccountData), InvalidCredentialsException.class,
@@ -72,9 +52,7 @@ public class AuthenticationServiceTest {
         String password = "Password]@";
         UserAccountData userAccountData = new UserAccountData(email, password);
         UserAccountDto userAccountDto = new UserAccountDto("ID2", email, password);
-        Mockito.when(this.userAccountRepository.findUserAccountByEmail(email)).thenReturn(
-                Optional.of(userAccountDto)
-        );
+        Mockito.when(this.findUserService.findUser(email)).thenReturn(userAccountDto);
         //Act
         UserAccountDto userAccountDtoReturned = this.authenticationService.execute(userAccountData);
         //Assert

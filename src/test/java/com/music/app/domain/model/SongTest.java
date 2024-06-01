@@ -15,9 +15,10 @@ public class SongTest {
         long size = 3L;
         String author = "Singer";
         String album = "Album";
+        String idCreator = "ID1";
         boolean isPublic = false;
         TestingExceptionAssertions.assertThrows(
-                () -> new Song(title, genre, size, author, album, isPublic), NullOrEmptyValueExeption.class, TITTLE_IS_REQUIRED
+                () -> new Song(title, genre, size, author, album, isPublic, idCreator), NullOrEmptyValueExeption.class, TITTLE_IS_REQUIRED
         );
     }
 
@@ -28,9 +29,10 @@ public class SongTest {
         long size = 3L;
         String author = "Singer";
         String album = "Album";
+        String idCreator = "ID1";
         boolean isPublic = false;
         TestingExceptionAssertions.assertThrows(
-                () -> new Song(title, genre, size, author, album, isPublic), NullOrEmptyValueExeption.class, TITTLE_IS_REQUIRED
+                () -> new Song(title, genre, size, author, album, isPublic, idCreator), NullOrEmptyValueExeption.class, TITTLE_IS_REQUIRED
         );
     }
 
@@ -41,9 +43,10 @@ public class SongTest {
         long size = 3L;
         String author = null;
         String album = "Album";
+        String idCreator = "ID1";
         boolean isPublic = false;
         TestingExceptionAssertions.assertThrows(
-                () -> new Song(title, genre, size, author, album, isPublic), NullOrEmptyValueExeption.class, AUTHOR_IS_REQUIRED
+                () -> new Song(title, genre, size, author, album, isPublic, idCreator), NullOrEmptyValueExeption.class, AUTHOR_IS_REQUIRED
         );
     }
 
@@ -54,9 +57,10 @@ public class SongTest {
         long size = 3L;
         String author = "";
         String album = "Album";
+        String idCreator = "ID1";
         boolean isPublic = false;
         TestingExceptionAssertions.assertThrows(
-                () -> new Song(title, genre, size, author, album, isPublic), NullOrEmptyValueExeption.class, AUTHOR_IS_REQUIRED
+                () -> new Song(title, genre, size, author, album, isPublic, idCreator), NullOrEmptyValueExeption.class, AUTHOR_IS_REQUIRED
         );
     }
 
@@ -67,9 +71,10 @@ public class SongTest {
         long size = 0L;
         String author = "Singer";
         String album = "Album";
+        String idCreator = "ID1";
         boolean isPublic = false;
         TestingExceptionAssertions.assertThrows(
-                () -> new Song(title, genre, size, author, album, isPublic), InvalidValueException.class, SIZE_NEEDS_TO_BE_BIGGER_THAN
+                () -> new Song(title, genre, size, author, album, isPublic, idCreator), InvalidValueException.class, SIZE_NEEDS_TO_BE_BIGGER_THAN
         );
     }
 
@@ -80,9 +85,10 @@ public class SongTest {
         long size = -4L;
         String author = "Singer";
         String album = "Album";
+        String idCreator = "ID1";
         boolean isPublic = false;
         TestingExceptionAssertions.assertThrows(
-                () -> new Song(title, genre, size, author, album, isPublic), InvalidValueException.class, SIZE_NEEDS_TO_BE_BIGGER_THAN
+                () -> new Song(title, genre, size, author, album, isPublic, idCreator), InvalidValueException.class, SIZE_NEEDS_TO_BE_BIGGER_THAN
         );
     }
 }

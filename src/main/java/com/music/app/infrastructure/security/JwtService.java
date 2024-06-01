@@ -1,6 +1,6 @@
 package com.music.app.infrastructure.security;
 
-import com.music.app.domain.dtos.TokenDto;
+import com.music.app.infrastructure.wrappers.TokenWrapper;
 import com.music.app.domain.dtos.UserAccountDto;
 import com.music.app.domain.ports.TokenGenerator;
 import io.jsonwebtoken.Claims;
@@ -23,7 +23,7 @@ public class JwtService implements TokenGenerator {
     private long jwtExpirationTime;
 
     @Override
-    public TokenDto generateToken(UserAccountDto authenticatedUserAccount) {
+    public TokenWrapper generateToken(UserAccountDto authenticatedUserAccount) {
         String jwtToken = Jwts
                 .builder()
                 .subject(authenticatedUserAccount.email())
@@ -31,7 +31,7 @@ public class JwtService implements TokenGenerator {
                 .expiration(new Date(System.currentTimeMillis() + jwtExpirationTime))
                 .signWith(getSignInKey())
                 .compact();
-        return new TokenDto(jwtToken, jwtExpirationTime);
+        return new TokenWrapper(jwtToken, jwtExpirationTime);
 
     }
 
@@ -46,7 +46,7 @@ public class JwtService implements TokenGenerator {
         return (userEmailInToken.equals(userEmail)) && !isExpired(token);
     }
 
-    private String extractUserAccountEmail(String token) {
+    public String extractUserAccountEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 

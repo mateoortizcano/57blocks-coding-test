@@ -1,10 +1,11 @@
 package com.music.app.infrastructure.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.music.app.domain.dtos.TokenDto;
 import com.music.app.domain.dtos.UserAccountDto;
 import com.music.app.domain.ports.IUserAccountRepository;
 import com.music.app.domain.ports.TokenGenerator;
+import com.music.app.infrastructure.converters.UserAccountDataConverter;
+import com.music.app.infrastructure.wrappers.TokenWrapper;
 import com.music.app.infrastructure.wrappers.UserAccountDataWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -37,12 +38,18 @@ public class UserControllerTest {
 
     @Test
     public void createAnUserAccountSuccessfully() throws Exception {
-        UserAccountDataWrapper userAccountDataWrapper = new UserAccountDataWrapper();
         String email = "email@email.com";
-        userAccountDataWrapper.setEmail(email);
         String password = "PasswordNew]";
-        userAccountDataWrapper.setPassword(password);
-        performCreateAccount(userAccountDataWrapper);
+        UserAccountDataWrapper userAccountDataWrapper = new UserAccountDataWrapper(
+                email, password
+        );
+        mocMvc.perform(post(
+                "/users/signup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(userAccountDataWrapper))
+        ).andExpect(
+                status().isCreated()
+        ).andReturn();
         Optional<UserAccountDto> userAccountByEmail = userAccountRepository.findUserAccountByEmail(email);
         Assertions.assertTrue(userAccountByEmail.isPresent());
         Assertions.assertEquals(password, userAccountByEmail.get().password());
@@ -50,9 +57,10 @@ public class UserControllerTest {
 
     @Test
     public void AuthenticateUserSuccessfully() throws Exception {
-        UserAccountDataWrapper userAccountDataWrapper = new UserAccountDataWrapper();
-        userAccountDataWrapper.setEmail("emailnew@email.com");
-        userAccountDataWrapper.setPassword("secondPasswordNew]");
+        UserAccountDataWrapper userAccountDataWrapper = new UserAccountDataWrapper(
+                "emailnew@email.com",
+                "secondPasswordNew]"
+        );
         //Create user first
         performCreateAccount(userAccountDataWrapper);
         //
@@ -64,19 +72,13 @@ public class UserControllerTest {
                 status().is2xxSuccessful()
         ).andReturn();
         String resultInJson = mvcResult.getResponse().getContentAsString();
-        TokenDto returnedToken = objectMapper.readValue(resultInJson, TokenDto.class);
+        TokenWrapper returnedToken = objectMapper.readValue(resultInJson, TokenWrapper.class);
         Assertions.assertTrue(
-                this.tokenGenerator.isTokenValid(returnedToken.token(), userAccountDataWrapper.getEmail())
+                this.tokenGenerator.isTokenValid(returnedToken.token(), userAccountDataWrapper.email())
         );
     }
 
-    private void performCreateAccount(UserAccountDataWrapper userAccountDataWrapper) throws Exception {
-        mocMvc.perform(post(
-                "/users/signup")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(userAccountDataWrapper))
-        ).andExpect(
-                status().isCreated()
-        ).andReturn();
+    private void performCreateAccount(UserAccountDataWrapper userAccountDataWrapper) {
+        this.userAccountRepository.createUserAccount(UserAccountDataConverter.convertToDomain(userAccountDataWrapper));
     }
 }

@@ -23,8 +23,8 @@ public class UserAccountDataConverter {
 
     public static UserAccountData convertToDomain(UserAccountDataWrapper userAccountDataWrapper) {
         return new UserAccountData(
-                userAccountDataWrapper.getEmail(),
-                userAccountDataWrapper.getPassword()
+                userAccountDataWrapper.email(),
+                userAccountDataWrapper.password()
         );
     }
 }

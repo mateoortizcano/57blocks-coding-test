@@ -7,8 +7,11 @@ import com.music.app.infrastructure.converters.SongConverter;
 import com.music.app.infrastructure.repositories.entities.SongEntity;
 import com.music.app.infrastructure.repositories.jpa.SongRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,5 +30,12 @@ public class SongRepository implements ISongRepository {
         return SongConverter.convertToDto(
                 this.songRepositoryJPA.findByTitle(title)
         );
+    }
+
+    @Override
+    public List<SongDto> getAllPublicOrCreatedByProvidedEmail(String email, int pageNumber, int pageSize) {
+        Pageable paginationLimit = PageRequest.of(pageNumber, pageSize);
+        return this.songRepositoryJPA.findByIsPublicTrueOrCreatedByEmail(email, paginationLimit)
+                .stream().map(SongConverter::convertToDto).toList();
     }
 }
