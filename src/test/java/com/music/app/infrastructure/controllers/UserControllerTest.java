@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.music.app.domain.dtos.UserAccountDto;
 import com.music.app.domain.ports.IUserAccountRepository;
 import com.music.app.domain.ports.TokenGenerator;
-import com.music.app.infrastructure.converters.UserAccountDataConverter;
 import com.music.app.infrastructure.wrappers.TokenWrapper;
 import com.music.app.infrastructure.wrappers.UserAccountDataWrapper;
 import org.junit.jupiter.api.Assertions;
