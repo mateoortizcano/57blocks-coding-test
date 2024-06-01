@@ -13,9 +13,11 @@ This app is containerized using Docker. In the files structure there is a Docker
 
 ### To execute this:
 1. Make sure you have JAVA_HOME is java 17
-2. In the root folder of this repository open a console.
-3. Run this commands
+2. Make sure you have Docker installed
+3. In the root folder of this repository open a console.
+4. Run this commands
    ```
    $ ./gradlew build
-   
+   $ docker build -t springboot-app .
+   $ docker compose up -d
     ```
