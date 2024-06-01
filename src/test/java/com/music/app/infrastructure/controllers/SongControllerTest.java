@@ -6,6 +6,7 @@ import com.music.app.domain.dtos.UserAccountDto;
 import com.music.app.domain.ports.ISongRepository;
 import com.music.app.domain.ports.TokenGenerator;
 import com.music.app.infrastructure.wrappers.SongWrapper;
+import com.music.app.infrastructure.wrappers.UpdateSongWrapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -90,5 +90,29 @@ public class SongControllerTest {
         SongDto[] songs = objectMapper.readValue(resultInJson, SongDto[].class);
         //Assert
         Assertions.assertEquals(4, songs.length);
+    }
+
+    @Test
+    public void updateAFieldInASong() throws Exception {
+        //Arrange
+        String title = "Go Your Own Way";
+        String songId = "5";
+        String newTitle = "New tittle";
+        SongDto songBefore = songRepository.findById(songId).get();
+        String token = getBearerToken("2", "amiller@example.com", "secondPasswordNew]");
+        UpdateSongWrapper song = new UpdateSongWrapper(newTitle, null, null, null, null, null);
+        //Act
+        mocMvc.perform(patch(
+                "/songs/5")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(song))
+                .header(HttpHeaders.AUTHORIZATION, token)
+        ).andExpect(
+                status().is2xxSuccessful()
+        ).andReturn();
+        //Assert
+        SongDto songAfter = songRepository.findById(songId).get();
+        Assertions.assertEquals(title, songBefore.getTitle());
+        Assertions.assertEquals(newTitle, songAfter.getTitle());
     }
 }

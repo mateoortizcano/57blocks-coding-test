@@ -1,5 +1,6 @@
 package com.music.app.infrastructure.wrappers;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -20,7 +21,8 @@ public record SongWrapper(
         String author,
         @Schema(description = "Album name")
         String album,
+        @JsonProperty("public")
         @NotNull
-        @Schema(description = "Is the song public?")
+        @Schema(description = "Is the song public?", name = "public")
         boolean isPublic) {
 }

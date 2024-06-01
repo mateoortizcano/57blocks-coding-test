@@ -50,6 +50,7 @@ public class SongConverter {
 
     public static SongEntity convertToEntity(SongDto song) {
         SongEntity songEntity = new SongEntity();
+        songEntity.setId(song.getId());
         songEntity.setTitle(song.getTitle());
         songEntity.setGenre(song.getGenre());
         songEntity.setSize(song.getSize());

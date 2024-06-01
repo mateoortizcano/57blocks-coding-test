@@ -1,9 +1,6 @@
 package com.music.app.infrastructure.errorhandlers;
 
-import com.music.app.domain.exceptions.ExistentAccountException;
-import com.music.app.domain.exceptions.InvalidCredentialsException;
-import com.music.app.domain.exceptions.InvalidValueException;
-import com.music.app.domain.exceptions.NullOrEmptyValueExeption;
+import com.music.app.domain.exceptions.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -25,6 +22,8 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         CODIGOS_ESTADO.put(InvalidValueException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(NullOrEmptyValueExeption.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(InvalidCredentialsException.class.getSimpleName(), HttpStatus.UNAUTHORIZED.value());
+        CODIGOS_ESTADO.put(NotAllowedOperationException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+        CODIGOS_ESTADO.put(NotFoundExxeption.class.getSimpleName(), HttpStatus.NOT_FOUND.value());
     }
 
     @ExceptionHandler(Exception.class)

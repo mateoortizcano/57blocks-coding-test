@@ -1,5 +1,6 @@
 package com.music.app.infrastructure.wrappers;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(name = "Update Song Data", description = "Data to update a specific Song")
@@ -14,6 +15,7 @@ public record UpdateSongWrapper(
         String author,
         @Schema(description = "Album name")
         String album,
-        @Schema(description = "Is the song public?")
+        @JsonProperty("public")
+        @Schema(description = "Is the song public?", name = "public")
         Boolean isPublic) {
 }
