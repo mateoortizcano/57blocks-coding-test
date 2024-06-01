@@ -1,0 +1,29 @@
+version: "3"
+services:
+  mysql-db:
+    image: mysql:latest
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: 57blocks
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+
+  spring-boot-app:
+    build: .
+    container_name: spring-boot-app
+    image: springboot-app
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/57blocks
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
+      JASYPT_ENCRIPTOR_PASSWORD: yPrm+DiuGqs0e11uwfEz16NiXODLedo+nF2Wd2/2ERE=
+      SECURITY_JWT_SECRET_KEY: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
