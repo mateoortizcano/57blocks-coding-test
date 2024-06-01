@@ -58,12 +58,9 @@ public class UserControllerTest {
     @Test
     public void AuthenticateUserSuccessfully() throws Exception {
         UserAccountDataWrapper userAccountDataWrapper = new UserAccountDataWrapper(
-                "emailnew@email.com",
+                "jsmith@example.com",
                 "secondPasswordNew]"
         );
-        //Create user first
-        performCreateAccount(userAccountDataWrapper);
-        //
         MvcResult mvcResult = mocMvc.perform(post(
                 "/users/login")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -76,9 +73,5 @@ public class UserControllerTest {
         Assertions.assertTrue(
                 this.tokenGenerator.isTokenValid(returnedToken.token(), userAccountDataWrapper.email())
         );
-    }
-
-    private void performCreateAccount(UserAccountDataWrapper userAccountDataWrapper) {
-        this.userAccountRepository.createUserAccount(UserAccountDataConverter.convertToDomain(userAccountDataWrapper));
     }
 }

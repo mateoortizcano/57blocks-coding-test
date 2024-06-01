@@ -1,0 +1,37 @@
+INSERT INTO users (id, email, password) VALUES
+('f591a3bd-462f-4248-89cf-67e88efbf569', 'jsmith@example.com', '95hlMhN4C/J0zRa5Vlef9zA6obMwqblF'),
+('f591a3bd-462f-4248-89cf-67e88efbf568', 'amiller@example.com', '95hlMhN4C/J0zRa5Vlef9zA6obMwqblF'),
+('f591a3bd-462f-4248-89cf-67e88efbf567', 'rjohnson@example.com', '95hlMhN4C/J0zRa5Vlef9zA6obMwqblF');
+
+
+INSERT INTO songs (id, album, author, genre, is_public, size, title, created_by_id) VALUES
+('1', 'Greatest Hits', 'Queen', 'Rock', 1, 5000000, 'Bohemian Rhapsody', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('2', 'Thriller', 'Michael Jackson', 'Pop', 1, 4500000, 'Billie Jean', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('3', 'Back in Black', 'AC/DC', 'Rock', 1, 4800000, 'You Shook Me All Night Long', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('4', 'The Dark Side of the Moon', 'Pink Floyd', 'Progressive Rock', 1, 5200000, 'Time', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('5', 'Rumours', 'Fleetwood Mac', 'Soft Rock', 1, 4900000, 'Go Your Own Way', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('6', 'The Joshua Tree', 'U2', 'Rock', 0, 4700000, 'With or Without You', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('7', 'Hotel California', 'Eagles', 'Rock', 0, 5100000, 'Hotel California', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('8', 'Led Zeppelin IV', 'Led Zeppelin', 'Rock', 0, 5300000, 'Stairway to Heaven', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('9', 'Born to Run', 'Bruce Springsteen', 'Rock', 0, 4600000, 'Born to Run', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('10', 'Purple Rain', 'Prince', 'Pop', 1, 4400000, 'Purple Rain', 'f591a3bd-462f-4248-89cf-67e88efbf569'),
+('11', 'Sgt. Peppers Lonely Hearts Club Band', 'The Beatles', 'Rock', 1, 4900000, 'Lucy in the Sky with Diamonds', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('12', 'The Wall', 'Pink Floyd', 'Progressive Rock', 1, 5500000, 'Comfortably Numb', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('13', 'Abbey Road', 'The Beatles', 'Rock', 1, 5000000, 'Come Together', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('14', 'Born in the U.S.A.', 'Bruce Springsteen', 'Rock', 1, 4700000, 'Dancing in the Dark', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('15', 'Brothers in Arms', 'Dire Straits', 'Rock', 1, 5100000, 'Money for Nothing', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('16', 'The Doors', 'The Doors', 'Rock', 0, 4800000, 'Light My Fire', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('17', 'A Night at the Opera', 'Queen', 'Rock', 0, 5200000, 'Somebody to Love', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('18', 'Hysteria', 'Def Leppard', 'Rock', 0, 4900000, 'Pour Some Sugar on Me', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('19', 'Let It Be', 'The Beatles', 'Rock', 0, 4700000, 'Let It Be', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('20', 'Bat Out of Hell', 'Meat Loaf', 'Rock', 0, 5300000, 'Paradise by the Dashboard Light', 'f591a3bd-462f-4248-89cf-67e88efbf568'),
+('21', 'The Essential Michael Jackson', 'Michael Jackson', 'Pop', 1, 5000000, 'Smooth Criminal', 'f591a3bd-462f-4248-89cf-67e88efbf567'),
+('22', 'Led Zeppelin II', 'Led Zeppelin', 'Rock', 1, 4800000, 'Whole Lotta Love', 'f591a3bd-462f-4248-89cf-67e88efbf567'),
+('23', 'Graceland', 'Paul Simon', 'Pop', 1, 4600000, 'You Can Call Me Al', 'f591a3bd-462f-4248-89cf-67e88efbf567'),
+('24', 'The Stranger', 'Billy Joel', 'Rock', 1, 4900000, 'Piano Man', 'f591a3bd-462f-4248-89cf-67e88efbf567'),
+('25', 'Born in the U.S.A.', 'Bruce Springsteen', 'Rock', 1, 4700000, 'Born in the U.S.A.', 'f591a3bd-462f-4248-89cf-67e88efbf567'),
+('26', 'The Very Best of Fleetwood Mac', 'Fleetwood Mac', 'Soft Rock', 0, 5000000, 'Dreams', 'f591a3bd-462f-4248-89cf-67e88efbf567'),
+('27', 'Electric Ladyland', 'Jimi Hendrix', 'Rock', 0, 5200000, 'All Along the Watchtower', 'f591a3bd-462f-4248-89cf-67e88efbf567'),
+('28', 'The Complete Studio Albums', 'Led Zeppelin', 'Rock', 0, 5400000, 'Kashmir', 'f591a3bd-462f-4248-89cf-67e88efbf567'),
+('29', 'The Best of Bob Dylan', 'Bob Dylan', 'Folk', 0, 4600000, 'Like a Rolling Stone', 'f591a3bd-462f-4248-89cf-67e88efbf567'),
+('30', 'Darkness on the Edge of Town', 'Bruce Springsteen', 'Rock', 0, 4800000, 'Some song', 'f591a3bd-462f-4248-89cf-67e88efbf567');
