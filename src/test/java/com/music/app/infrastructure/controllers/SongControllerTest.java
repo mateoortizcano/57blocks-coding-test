@@ -80,7 +80,7 @@ public class SongControllerTest {
         String token = getBearerToken("2", "amiller@example.com", "secondPasswordNew]");
         //Act
         MvcResult mvcResult = mocMvc.perform(get(
-                "/created-by-me?page-number=0&page-size=10")
+                "/songs/created-by-me?page-number=0&page-size=10")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, token)
         ).andExpect(
