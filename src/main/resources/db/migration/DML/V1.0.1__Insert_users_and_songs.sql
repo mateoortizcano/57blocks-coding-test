@@ -1,7 +1,7 @@
 INSERT INTO users (id, email, password) VALUES
-('f591a3bd-462f-4248-89cf-67e88efbf569', 'jsmith@example.com', '95hlMhN4C/J0zRa5Vlef9zA6obMwqblF'),
-('f591a3bd-462f-4248-89cf-67e88efbf568', 'amiller@example.com', '95hlMhN4C/J0zRa5Vlef9zA6obMwqblF'),
-('f591a3bd-462f-4248-89cf-67e88efbf567', 'rjohnson@example.com', '95hlMhN4C/J0zRa5Vlef9zA6obMwqblF');
+('f591a3bd-462f-4248-89cf-67e88efbf569', 'jsmith@example.com', 'HkvtwkWRwKAfCjMpCzkWwJx3Y2P4u2Hc'),
+('f591a3bd-462f-4248-89cf-67e88efbf568', 'amiller@example.com', 'HkvtwkWRwKAfCjMpCzkWwJx3Y2P4u2Hc'),
+('f591a3bd-462f-4248-89cf-67e88efbf567', 'rjohnson@example.com', 'HkvtwkWRwKAfCjMpCzkWwJx3Y2P4u2Hc');
 
 
 INSERT INTO songs (id, album, author, genre, is_public, size, title, created_by_id) VALUES
