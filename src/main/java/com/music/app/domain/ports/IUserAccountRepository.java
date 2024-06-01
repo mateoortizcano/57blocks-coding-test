@@ -18,6 +18,7 @@ public interface IUserAccountRepository {
      * Register a user account in the repository
      *
      * @param userAccountData The account information to register.
+     * @return the id of the user created
      */
-    void createUserAccount(UserAccountData userAccountData);
+    String createUserAccount(UserAccountData userAccountData);
 }

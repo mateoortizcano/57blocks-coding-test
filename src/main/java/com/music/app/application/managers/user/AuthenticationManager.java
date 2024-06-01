@@ -7,8 +7,10 @@ import com.music.app.domain.ports.TokenGenerator;
 import com.music.app.domain.services.user.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class AuthenticationManager {
     @Autowired
     private AuthenticationService authenticationService;

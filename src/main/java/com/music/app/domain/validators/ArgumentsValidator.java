@@ -20,6 +20,12 @@ public class ArgumentsValidator {
         }
     }
 
+    public static void verifyNotEmpty(String value, String message) {
+        if (value == null || value.isEmpty()) {
+            throw new NullOrEmptyValueExeption(message);
+        }
+    }
+
     public static void verifyEmailFormat(String email, String message) {
         verifyRegexExpression(EMAIL_REGEX, email, message);
     }
@@ -36,8 +42,14 @@ public class ArgumentsValidator {
         }
     }
 
-    public static void verifyIsBiggerThan(Long size, Long limit, String message) {
-        if (size.compareTo(limit) <= 0) {
+    public static void verifyIsBiggerThan(Long number, Long limit, String message) {
+        if (number.compareTo(limit) <= 0) {
+            throw new InvalidValueException(message);
+        }
+    }
+
+    public static void verifyIsBiggerThan(int number, int limit, String message) {
+        if (number < limit ) {
             throw new InvalidValueException(message);
         }
     }

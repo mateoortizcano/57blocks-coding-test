@@ -25,8 +25,10 @@ public class UserAccountRepository implements IUserAccountRepository {
     }
 
     @Override
-    public void createUserAccount(UserAccountData userAccountData) {
+    public String createUserAccount(UserAccountData userAccountData) {
         UserAccountEntity entity = UserAccountDataConverter.convertToEntity(userAccountData);
-        this.userAccountRepositoryJPA.save(entity);
+        entity= this.userAccountRepositoryJPA.save(entity);
+        this.userAccountRepositoryJPA.flush();
+        return entity.getId();
     }
 }

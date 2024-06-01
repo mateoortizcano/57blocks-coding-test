@@ -11,5 +11,7 @@ import java.util.Optional;
 public interface SongRepositoryJPA extends PagingAndSortingRepository<SongEntity, String>, JpaRepository<SongEntity, String> {
     Optional<SongEntity> findByTitle(String name);
 
-    List<SongEntity> findByIsPublicTrueOrCreatedByEmail(String email, Pageable pageable);
+    List<SongEntity> findByIsPublicTrue(Pageable pageable);
+
+    List<SongEntity> findByCreatedById(String createdById, Pageable pageable);
 }

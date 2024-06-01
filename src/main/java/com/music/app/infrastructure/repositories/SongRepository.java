@@ -21,7 +21,7 @@ public class SongRepository implements ISongRepository {
 
     @Override
     public void create(Song song) {
-        SongEntity songEntity = SongConverter.dtoToEntity(song);
+        SongEntity songEntity = SongConverter.convertToEntity(song);
         this.songRepositoryJPA.save(songEntity);
     }
 
@@ -33,9 +33,27 @@ public class SongRepository implements ISongRepository {
     }
 
     @Override
-    public List<SongDto> getAllPublicOrCreatedByProvidedEmail(String email, int pageNumber, int pageSize) {
+    public List<SongDto> getAllPublicSongs(int pageNumber, int pageSize) {
         Pageable paginationLimit = PageRequest.of(pageNumber, pageSize);
-        return this.songRepositoryJPA.findByIsPublicTrueOrCreatedByEmail(email, paginationLimit)
+        return this.songRepositoryJPA.findByIsPublicTrue(paginationLimit)
                 .stream().map(SongConverter::convertToDto).toList();
+    }
+
+    @Override
+    public List<SongDto> getAllMySongs(String userId, int pageNumber, int pageSize) {
+        Pageable paginationLimit = PageRequest.of(pageNumber, pageSize);
+        return this.songRepositoryJPA.findByCreatedById(userId, paginationLimit)
+                .stream().map(SongConverter::convertToDto).toList();
+    }
+
+    @Override
+    public void updateSongAttributes(SongDto song) {
+        SongEntity songEntity = SongConverter.convertToEntity(song);
+        this.songRepositoryJPA.save(songEntity);
+    }
+
+    @Override
+    public Optional<SongDto> findById(String songId) {
+        return SongConverter.convertToDto(this.songRepositoryJPA.findById(songId));
     }
 }
