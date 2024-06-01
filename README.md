@@ -21,3 +21,14 @@ This app is containerized using Docker. In the files structure there is a Docker
    $ docker build -t springboot-app .
    $ docker compose up -d
     ```
+5. After some minutes you can check if the containers are running. You can use this command
+   ```
+   $ docker ps
+    ```
+   You will see two containers springboot-app and mysql:latest.
+6. To access to the developed resources please go to http://localhost:8080/swagger-ui/index.html in your local machine.
+
+### About this project:
+1. this solution is developed in a Hexagonal Architecture (Ports and adapters) in order to define clearly the responsabilities of the components of the app.
+2. There are defined a set of unit tests and integration tests guaranteeing the aplication of the bussiness rules in the solution domain.
+3. The URL provided before, represents the API documentation in OpenAPI, there are the definitions of the different resources developed.
